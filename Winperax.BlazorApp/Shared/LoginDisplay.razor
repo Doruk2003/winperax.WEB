@@ -1,0 +1,15 @@
+﻿@inject AuthService AuthService
+@inject NavigationManager Navigation
+
+<div>
+    <span>Welcome, User!</span>
+    <button @onclick=""Logout"">Logout</button>
+</div>
+
+@code {
+    private void Logout()
+    {
+        // JWT temizleme ve çıkış işlemleri
+        Navigation.NavigateTo(""/login"");
+    }
+}
