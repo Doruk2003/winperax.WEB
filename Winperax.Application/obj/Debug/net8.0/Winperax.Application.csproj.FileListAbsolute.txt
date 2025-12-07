@@ -1,0 +1,16 @@
+D:\Projects\Net\src\Winperax.Application\bin\Debug\net8.0\Winperax.Application.deps.json
+D:\Projects\Net\src\Winperax.Application\bin\Debug\net8.0\Winperax.Application.dll
+D:\Projects\Net\src\Winperax.Application\bin\Debug\net8.0\Winperax.Application.pdb
+D:\Projects\Net\src\Winperax.Application\bin\Debug\net8.0\Winperax.Domain.dll
+D:\Projects\Net\src\Winperax.Application\bin\Debug\net8.0\Winperax.Domain.pdb
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.csproj.AssemblyReference.cache
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.AssemblyInfoInputs.cache
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.AssemblyInfo.cs
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.csproj.CoreCompileInputs.cache
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.sourcelink.json
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.7A63CC57.Up2Date
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.dll
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\refint\Winperax.Application.dll
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\Winperax.Application.pdb
+D:\Projects\Net\src\Winperax.Application\obj\Debug\net8.0\ref\Winperax.Application.dll

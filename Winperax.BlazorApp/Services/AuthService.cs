@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Winperax.BlazorApp.Models;
+﻿using System.Net.Http.Json;
 
 public class AuthService
 {
@@ -14,7 +11,7 @@ public class AuthService
 
     public async Task<bool> LoginAsync(LoginModel login)
     {
-        var response = await _http.PostAsJsonAsync(""api/auth/login"", login);
+        var response = await _http.PostAsJsonAsync("api/auth/login", login);
         return response.IsSuccessStatusCode;
     }
 
