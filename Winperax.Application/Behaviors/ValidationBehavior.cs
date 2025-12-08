@@ -4,6 +4,7 @@ using MediatR;
 namespace Winperax.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse> // ✅ 'notnull' kısıtlaması kaldırıldı
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

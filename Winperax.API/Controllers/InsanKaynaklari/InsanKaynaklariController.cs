@@ -16,7 +16,7 @@ namespace Winperax.API.Controllers.InsanKaynaklari
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateHRCommand command)
-            Ok(await _mediator.Send(command));
+            => Ok(await _mediator.Send(command)); // ✅ ; eksikti
 
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] UpdateHRCommand command)

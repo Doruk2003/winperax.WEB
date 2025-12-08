@@ -1,5 +1,6 @@
 using MediatR;
 using Winperax.Domain.Entities;
+using Winperax.Domain.Interfaces;
 
 namespace Winperax.Application.Modules.Siparis;
 
@@ -7,10 +8,9 @@ namespace Winperax.Application.Modules.Siparis;
 public record CreateSiparisCommand(
     string SiparisNo,
     string CariId,
-    DateTime Tarih,
+    DateTime SiparisTarihi,
     DateTime? TeslimTarihi,
-    string Durum,
-    string? Aciklama
+    string Durum
 ) : IRequest<SiparisEntity>;
 
 public class CreateSiparisCommandHandler : IRequestHandler<CreateSiparisCommand, SiparisEntity>
@@ -31,13 +31,77 @@ public class CreateSiparisCommandHandler : IRequestHandler<CreateSiparisCommand,
         {
             SiparisNo = request.SiparisNo,
             CariId = request.CariId,
-            Tarih = request.Tarih,
-            TeslimTarihi = request.TeslimTarihi,
+            SiparisTarihi = request.SiparisTarihi,
+            TeslimTarihi = request.TeslimTarihi ?? DateTime.Now,
             Durum = request.Durum,
-            Aciklama = request.Aciklama,
         };
 
-        await _repo.AddAsync(entity); // Burada AddAsync kullanıldı
+        await _repo.AddAsync(entity);
+        return entity;
+    }
+}
+
+// DELETE
+public record DeleteSiparisCommand(string Id) : IRequest<bool>;
+
+public class DeleteSiparisCommandHandler : IRequestHandler<DeleteSiparisCommand, bool>
+{
+    private readonly ISiparisRepository _repo;
+
+    public DeleteSiparisCommandHandler(ISiparisRepository repo)
+    {
+        _repo = repo;
+    }
+
+    public async Task<bool> Handle(
+        DeleteSiparisCommand request,
+        CancellationToken cancellationToken
+    )
+    {
+        var entity = await _repo.GetByIdAsync(request.Id);
+        if (entity == null)
+            throw new Exception("Sipariş bulunamadı: " + request.Id);
+
+        await _repo.DeleteAsync(request.Id);
+        return true;
+    }
+}
+
+// UPDATE
+public record UpdateSiparisCommand(
+    string Id,
+    string SiparisNo,
+    string CariId,
+    DateTime SiparisTarihi,
+    DateTime? TeslimTarihi,
+    string Durum
+) : IRequest<SiparisEntity>;
+
+public class UpdateSiparisCommandHandler : IRequestHandler<UpdateSiparisCommand, SiparisEntity>
+{
+    private readonly ISiparisRepository _repo;
+
+    public UpdateSiparisCommandHandler(ISiparisRepository repo)
+    {
+        _repo = repo;
+    }
+
+    public async Task<SiparisEntity> Handle(
+        UpdateSiparisCommand request,
+        CancellationToken cancellationToken
+    )
+    {
+        var entity = await _repo.GetByIdAsync(request.Id);
+        if (entity == null)
+            throw new Exception("Sipariş bulunamadı: " + request.Id);
+
+        entity.SiparisNo = request.SiparisNo;
+        entity.CariId = request.CariId;
+        entity.SiparisTarihi = request.SiparisTarihi;
+        entity.TeslimTarihi = request.TeslimTarihi ?? DateTime.Now;
+        entity.Durum = request.Durum;
+
+        await _repo.UpdateAsync(entity);
         return entity;
     }
 }

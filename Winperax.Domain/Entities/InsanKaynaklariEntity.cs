@@ -14,6 +14,6 @@ public class InsanKaynaklariEntity
     public int YillikIzinHakki { get; set; }
     public int KullanilanIzin { get; set; }
     public int KalanIzin { get; set; }
-    public List<IzinKaydi> Izinler { get; set; } = new();
+    public List<IzinKaydi> Izinler { get; set; } = new(); // IDE0028 uyarısını gidermek için
     public string Aciklama { get; set; }
 }

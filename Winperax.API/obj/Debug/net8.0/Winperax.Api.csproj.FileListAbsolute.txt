@@ -1,0 +1,9 @@
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.csproj.AssemblyReference.cache
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.AssemblyInfoInputs.cache
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.AssemblyInfo.cs
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.csproj.CoreCompileInputs.cache
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.sourcelink.json
