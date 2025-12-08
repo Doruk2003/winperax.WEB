@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.Cari.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.Cari.Entities;
 
 namespace Winperax.Infrastructure.Repositories.Cari;
 
-public interface I
+public interface ICariRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<Cari> GetByIdAsync(string id);
+    Task<IEnumerable<Cari>> GetAllAsync();
+    Task AddAsync(Cari entity);
+    Task UpdateAsync(Cari entity);
     Task DeleteAsync(string id);
 }

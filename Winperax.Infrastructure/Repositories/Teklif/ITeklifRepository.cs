@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.Teklif.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.Teklif.Entities;
 
 namespace Winperax.Infrastructure.Repositories.Teklif;
 
-public interface I
+public interface ITeklifRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<Teklif> GetByIdAsync(string id);
+    Task<IEnumerable<Teklif>> GetAllAsync();
+    Task AddAsync(Teklif entity);
+    Task UpdateAsync(Teklif entity);
     Task DeleteAsync(string id);
 }

@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.InsanKaynaklari.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.InsanKaynaklari.Entities;
 
 namespace Winperax.Infrastructure.Repositories.InsanKaynaklari;
 
-public interface I
+public interface IInsanKaynaklariRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<InsanKaynaklari> GetByIdAsync(string id);
+    Task<IEnumerable<InsanKaynaklari>> GetAllAsync();
+    Task AddAsync(InsanKaynaklari entity);
+    Task UpdateAsync(InsanKaynaklari entity);
     Task DeleteAsync(string id);
 }

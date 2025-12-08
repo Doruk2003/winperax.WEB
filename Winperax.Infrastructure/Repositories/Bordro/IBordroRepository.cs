@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.Bordro.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.Bordro.Entities;
 
 namespace Winperax.Infrastructure.Repositories.Bordro;
 
-public interface I
+public interface IBordroRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<Bordro> GetByIdAsync(string id);
+    Task<IEnumerable<Bordro>> GetAllAsync();
+    Task AddAsync(Bordro entity);
+    Task UpdateAsync(Bordro entity);
     Task DeleteAsync(string id);
 }

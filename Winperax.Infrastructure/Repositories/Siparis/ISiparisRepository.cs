@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.Siparis.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.Siparis.Entities;
 
 namespace Winperax.Infrastructure.Repositories.Siparis;
 
-public interface I
+public interface ISiparisRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<Siparis> GetByIdAsync(string id);
+    Task<IEnumerable<Siparis>> GetAllAsync();
+    Task AddAsync(Siparis entity);
+    Task UpdateAsync(Siparis entity);
     Task DeleteAsync(string id);
 }

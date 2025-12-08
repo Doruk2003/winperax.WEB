@@ -1,11 +1,9 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Winperax.Infrastructure.Persistence;
-using Winperax.Infrastructure.Repositories;
-using Winperax.Domain.Interfaces;
 using Winperax.API.Services;
 using Winperax.API.Settings;
+using Winperax.Domain.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +17,8 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 
-builder.Services
-    .AddAuthentication(options =>
+builder
+    .Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,7 +35,7 @@ builder.Services
             ValidIssuer = jwtIssuer,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
 
-            ClockSkew = TimeSpan.Zero
+            ClockSkew = TimeSpan.Zero,
         };
     });
 
@@ -45,7 +43,7 @@ builder.Services
 builder.Services.AddAuthorization();
 
 // ======================================================================
-// 🔥 DEPENDENCY INJECTION 
+// 🔥 DEPENDENCY INJECTION
 // ======================================================================
 
 // MongoDB bağlamı

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Winperax.API.Controllers.Users
 {
@@ -15,19 +15,19 @@ namespace Winperax.API.Controllers.Users
         }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll()
-            => Ok(await _mediator.Send(new GetAllUsersQuery()));
+        public async Task<IActionResult> GetAll() =>
+            Ok(await _mediator.Send(new GetAllUsersQuery()));
 
         [HttpGet("get/{id}")]
-        public async Task<IActionResult> GetById(string id)
-            => Ok(await _mediator.Send(new GetUserByIdQuery(id)));
+        public async Task<IActionResult> GetById(string id) =>
+            Ok(await _mediator.Send(new GetUserByIdQuery(id)));
 
         [HttpPost("update")]
-        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
-            => Ok(await _mediator.Send(command));
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command) =>
+            Ok(await _mediator.Send(command));
 
         [HttpPost("delete")]
-        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command)
-            => Ok(await _mediator.Send(command));
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command) =>
+            Ok(await _mediator.Send(command));
     }
 }

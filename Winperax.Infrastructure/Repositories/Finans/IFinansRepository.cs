@@ -1,14 +1,13 @@
-﻿using Winperax.Domain.Modules.Finans.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Winperax.Domain.Modules.Finans.Entities;
 
 namespace Winperax.Infrastructure.Repositories.Finans;
 
-public interface I
+public interface IFinansRepository
 {
-    // Ornek metodlar (gerekirse degistirilebilir)
-    Task<> GetByIdAsync(string id);
-    Task<IEnumerable<>> GetAllAsync();
-    Task AddAsync( entity);
-    Task UpdateAsync( entity);
+    Task<Finans> GetByIdAsync(string id);
+    Task<IEnumerable<Finans>> GetAllAsync();
+    Task AddAsync(Finans entity);
+    Task UpdateAsync(Finans entity);
     Task DeleteAsync(string id);
 }
