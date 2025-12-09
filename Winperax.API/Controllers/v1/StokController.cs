@@ -22,31 +22,27 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllStokQuery());
-            return Ok(ApiResponse<object>.Success(result, "Stok records retrieved successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Stok records retrieved successfully"));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetStokByIdQuery(id));
-            return Ok(ApiResponse<object>.Success(result, "Stok record retrieved successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Stok record retrieved successfully"));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStokCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = result.Id },
-                ApiResponse<object>.Success(result, "Stok record created successfully", 201)
-            );
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
+                ApiResponse<object>.SuccessResult(result, "Stok record created successfully"));
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UpdateStokCommand command)
         {
-            // Command sınıfında Id property'sine atama yapamayacağımız için, yeni bir instance oluşturuyoruz
             var updatedCommand = new UpdateStokCommand(
                 id,
                 command.StokKodu,
@@ -58,9 +54,9 @@ namespace Winperax.API.Controllers.v1
                 command.Kategori,
                 command.AktifMi
             );
-
+            
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.Success(result, "Stok record updated successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Stok record updated successfully"));
         }
 
         [HttpDelete("{id}")]
@@ -68,7 +64,7 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteStokCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.Success(result, "Stok record deleted successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Stok record deleted successfully"));
         }
     }
 }

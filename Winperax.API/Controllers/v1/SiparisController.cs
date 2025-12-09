@@ -22,33 +22,27 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllSiparisQuery());
-            return Ok(
-                ApiResponse<object>.Success(result, "Siparis records retrieved successfully")
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Siparis records retrieved successfully"));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetSiparisByIdQuery(id));
-            return Ok(ApiResponse<object>.Success(result, "Siparis record retrieved successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Siparis record retrieved successfully"));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSiparisCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = result.Id },
-                ApiResponse<object>.Success(result, "Siparis record created successfully", 201)
-            );
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
+                ApiResponse<object>.SuccessResult(result, "Siparis record created successfully"));
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UpdateSiparisCommand command)
         {
-            // Command sınıfında Id property'sine atama yapamayacağımız için, yeni bir instance oluşturuyoruz
             var updatedCommand = new UpdateSiparisCommand(
                 id,
                 command.SiparisNo,
@@ -57,9 +51,9 @@ namespace Winperax.API.Controllers.v1
                 command.TeslimTarihi,
                 command.Durum
             );
-
+            
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.Success(result, "Siparis record updated successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Siparis record updated successfully"));
         }
 
         [HttpDelete("{id}")]
@@ -67,7 +61,7 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteSiparisCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.Success(result, "Siparis record deleted successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Siparis record deleted successfully"));
         }
     }
 }

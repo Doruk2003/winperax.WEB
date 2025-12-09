@@ -22,48 +22,27 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllInsanKaynaklariQuery());
-            return Ok(
-                ApiResponse<object>.Success(
-                    result,
-                    "Insan Kaynaklari records retrieved successfully"
-                )
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Insan Kaynaklari records retrieved successfully"));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetInsanKaynaklariByIdQuery(id));
-            return Ok(
-                ApiResponse<object>.Success(
-                    result,
-                    "Insan Kaynaklari record retrieved successfully"
-                )
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Insan Kaynaklari record retrieved successfully"));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateInsanKaynaklariCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = result.Id },
-                ApiResponse<object>.Success(
-                    result,
-                    "Insan Kaynaklari record created successfully",
-                    201
-                )
-            );
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
+                ApiResponse<object>.SuccessResult(result, "Insan Kaynaklari record created successfully"));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(
-            string id,
-            [FromBody] UpdateInsanKaynaklariCommand command
-        )
+        public async Task<IActionResult> Update(string id, [FromBody] UpdateInsanKaynaklariCommand command)
         {
-            // Command sınıfında Id property'sine atama yapamayacağımız için, yeni bir instance oluşturuyoruz
             var updatedCommand = new UpdateInsanKaynaklariCommand(
                 id,
                 command.PersonelId,
@@ -72,11 +51,9 @@ namespace Winperax.API.Controllers.v1
                 command.KalanIzin,
                 command.Aciklama
             );
-
+            
             var result = await _mediator.Send(updatedCommand);
-            return Ok(
-                ApiResponse<object>.Success(result, "Insan Kaynaklari record updated successfully")
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Insan Kaynaklari record updated successfully"));
         }
 
         [HttpDelete("{id}")]
@@ -84,9 +61,7 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteInsanKaynaklariCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(
-                ApiResponse<object>.Success(result, "Insan Kaynaklari record deleted successfully")
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Insan Kaynaklari record deleted successfully"));
         }
     }
 }

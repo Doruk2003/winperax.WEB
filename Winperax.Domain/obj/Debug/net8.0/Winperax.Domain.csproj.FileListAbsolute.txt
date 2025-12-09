@@ -1,12 +1,12 @@
+D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.deps.json
+D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.dll
+D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.pdb
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.csproj.AssemblyReference.cache
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.GeneratedMSBuildEditorConfig.editorconfig
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.AssemblyInfoInputs.cache
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.AssemblyInfo.cs
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.csproj.CoreCompileInputs.cache
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.sourcelink.json
-D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.deps.json
-D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.dll
-D:\Projects\Net\src\Winperax.Domain\bin\Debug\net8.0\Winperax.Domain.pdb
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.dll
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\refint\Winperax.Domain.dll
 D:\Projects\Net\src\Winperax.Domain\obj\Debug\net8.0\Winperax.Domain.pdb

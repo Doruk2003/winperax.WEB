@@ -22,35 +22,27 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllMuhasebeQuery());
-            return Ok(
-                ApiResponse<object>.Success(result, "Muhasebe records retrieved successfully")
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Muhasebe records retrieved successfully"));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetMuhasebeByIdQuery(id));
-            return Ok(
-                ApiResponse<object>.Success(result, "Muhasebe record retrieved successfully")
-            );
+            return Ok(ApiResponse<object>.SuccessResult(result, "Muhasebe record retrieved successfully"));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateMuhasebeCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = result.Id },
-                ApiResponse<object>.Success(result, "Muhasebe record created successfully", 201)
-            );
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
+                ApiResponse<object>.SuccessResult(result, "Muhasebe record created successfully"));
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UpdateMuhasebeCommand command)
         {
-            // Command sınıfında Id property'sine atama yapamayacağımız için, yeni bir instance oluşturuyoruz
             var updatedCommand = new UpdateMuhasebeCommand(
                 id,
                 command.EvrakNo,
@@ -61,9 +53,9 @@ namespace Winperax.API.Controllers.v1
                 command.Aciklama,
                 command.GirisMi
             );
-
+            
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.Success(result, "Muhasebe record updated successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Muhasebe record updated successfully"));
         }
 
         [HttpDelete("{id}")]
@@ -71,7 +63,7 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteMuhasebeCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.Success(result, "Muhasebe record deleted successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Muhasebe record deleted successfully"));
         }
     }
 }

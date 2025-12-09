@@ -22,14 +22,14 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllUsersQuery());
-            return Ok(ApiResponse<object>.Success(result, "Users retrieved successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "Users retrieved successfully"));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetUserByIdQuery(id));
-            return Ok(ApiResponse<object>.Success(result, "User retrieved successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "User retrieved successfully"));
         }
 
         [HttpPut("{id}")]
@@ -43,9 +43,9 @@ namespace Winperax.API.Controllers.v1
                 command.RolId,
                 command.AktifMi
             );
-
+            
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.Success(result, "User updated successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "User updated successfully"));
         }
 
         [HttpDelete("{id}")]
@@ -53,7 +53,7 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteUserCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.Success(result, "User deleted successfully"));
+            return Ok(ApiResponse<object>.SuccessResult(result, "User deleted successfully"));
         }
     }
 }

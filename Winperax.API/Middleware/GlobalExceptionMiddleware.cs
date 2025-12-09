@@ -1,5 +1,10 @@
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Text.Json;
+using Winperax.API.Responses;
+using FluentValidation;
 
 namespace Winperax.API.Middleware
 {
@@ -8,10 +13,7 @@ namespace Winperax.API.Middleware
         private readonly RequestDelegate _next;
         private readonly ILogger<GlobalExceptionMiddleware> _logger;
 
-        public GlobalExceptionMiddleware(
-            RequestDelegate next,
-            ILogger<GlobalExceptionMiddleware> logger
-        )
+        public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
         {
             _next = next;
             _logger = logger;
@@ -34,29 +36,22 @@ namespace Winperax.API.Middleware
         {
             context.Response.ContentType = "application/json";
 
-            var problemDetails = new ProblemDetails
+            var response = exception switch
             {
-                Status = (int)HttpStatusCode.InternalServerError,
-                Title = "Internal Server Error",
-                Detail = "An unexpected error occurred.",
-                Instance = context.Request.Path,
+                ValidationException validationException => 
+                    ApiResponse.FailureResult(
+                        validationException.Errors.Select(e => e.ErrorMessage).ToArray(),
+                        "Validation failed"
+                    ),
+                _ => 
+                    ApiResponse.FailureResult(
+                        new[] { "An unexpected error occurred." },
+                        "Internal server error"
+                    )
             };
 
-            // Validation hataları için özel işlem
-            if (exception.GetType().Name == "ValidationException")
-            {
-                problemDetails.Status = (int)HttpStatusCode.BadRequest;
-                problemDetails.Title = "Validation Failed";
-                problemDetails.Detail = string.Join(
-                    "; ",
-                    ((FluentValidation.ValidationException)exception).Errors.Select(e =>
-                        e.ErrorMessage
-                    )
-                );
-            }
-
-            var jsonResponse = System.Text.Json.JsonSerializer.Serialize(problemDetails);
-            context.Response.StatusCode = problemDetails.Status!.Value;
+            context.Response.StatusCode = exception is ValidationException ? 400 : 500;
+            var jsonResponse = JsonSerializer.Serialize(response);
             await context.Response.WriteAsync(jsonResponse);
         }
     }

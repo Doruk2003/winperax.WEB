@@ -1,109 +1,66 @@
-using System.Net;
-
-namespace Winperax.API.Responses
+﻿namespace Winperax.API.Responses
 {
     public class ApiResponse<T>
     {
-        public bool IsSuccess { get; set; }
+        public bool Success { get; set; }
         public T? Data { get; set; }
-        public string[]? Errors { get; set; }
-        public int StatusCode { get; set; }
+        public string[] Errors { get; set; } = Array.Empty<string>();
         public string Message { get; set; } = string.Empty;
 
-        public static ApiResponse<T> Success(
-            T data,
-            string message = "Operation successful",
-            int statusCode = (int)HttpStatusCode.OK
-        )
+        public static ApiResponse<T> SuccessResult(T data, string message = "Operation successful")
         {
             return new ApiResponse<T>
             {
-                IsSuccess = true,
+                Success = true,
                 Data = data,
-                StatusCode = statusCode,
-                Message = message,
+                Message = message
             };
         }
 
-        public static ApiResponse<T> Failure(
-            string[] errors,
-            int statusCode = (int)HttpStatusCode.BadRequest,
-            string message = "Operation failed"
-        )
+        public static ApiResponse<T> FailureResult(string[] errors, string message = "Operation failed")
         {
             return new ApiResponse<T>
             {
-                IsSuccess = false,
+                Success = false,
                 Errors = errors,
-                StatusCode = statusCode,
-                Message = message,
+                Message = message
             };
         }
 
-        public static ApiResponse<T> Failure(
-            string error,
-            int statusCode = (int)HttpStatusCode.BadRequest,
-            string message = "Operation failed"
-        )
+        public static ApiResponse<T> FailureResult(string error, string message = "Operation failed")
         {
-            return new ApiResponse<T>
-            {
-                IsSuccess = false,
-                Errors = new[] { error },
-                StatusCode = statusCode,
-                Message = message,
-            };
+            return FailureResult(new[] { error }, message);
         }
     }
 
     public class ApiResponse
     {
-        public bool IsSuccess { get; set; }
-        public string[]? Errors { get; set; }
-        public int StatusCode { get; set; }
+        public bool Success { get; set; }
+        public string[] Errors { get; set; } = Array.Empty<string>();
         public string Message { get; set; } = string.Empty;
 
-        public static ApiResponse Success(
-            string message = "Operation successful",
-            int statusCode = (int)HttpStatusCode.OK
-        )
+        public static ApiResponse SuccessResult(string message = "Operation successful")
         {
             return new ApiResponse
             {
-                IsSuccess = true,
-                StatusCode = statusCode,
-                Message = message,
+                Success = true,
+                Message = message
             };
         }
 
-        public static ApiResponse Failure(
-            string[] errors,
-            int statusCode = (int)HttpStatusCode.BadRequest,
-            string message = "Operation failed"
-        )
+        public static ApiResponse FailureResult(string[] errors, string message = "Operation failed")
         {
             return new ApiResponse
             {
-                IsSuccess = false,
+                Success = false,
                 Errors = errors,
-                StatusCode = statusCode,
-                Message = message,
+                Message = message
             };
         }
 
-        public static ApiResponse Failure(
-            string error,
-            int statusCode = (int)HttpStatusCode.BadRequest,
-            string message = "Operation failed"
-        )
+        public static ApiResponse FailureResult(string error, string message = "Operation failed")
         {
-            return new ApiResponse
-            {
-                IsSuccess = false,
-                Errors = new[] { error },
-                StatusCode = statusCode,
-                Message = message,
-            };
+            return FailureResult(new[] { error }, message);
         }
     }
 }
