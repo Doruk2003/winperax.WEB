@@ -104,10 +104,7 @@ public class DeleteStokCommandHandler : IRequestHandler<DeleteStokCommand, bool>
         _repo = repo;
     }
 
-    public async Task<bool> Handle(
-        DeleteStokCommand request,
-        CancellationToken cancellationToken
-    )
+    public async Task<bool> Handle(DeleteStokCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repo.GetByIdAsync(request.Id);
         if (entity == null)

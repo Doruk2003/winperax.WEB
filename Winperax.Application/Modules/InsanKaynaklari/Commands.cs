@@ -13,7 +13,8 @@ public record CreateInsanKaynaklariCommand(
     string Aciklama
 ) : IRequest<InsanKaynaklariEntity>;
 
-public class CreateInsanKaynaklariCommandHandler : IRequestHandler<CreateInsanKaynaklariCommand, InsanKaynaklariEntity>
+public class CreateInsanKaynaklariCommandHandler
+    : IRequestHandler<CreateInsanKaynaklariCommand, InsanKaynaklariEntity>
 {
     private readonly IInsanKaynaklariRepository _repo;
 
@@ -51,7 +52,8 @@ public record UpdateInsanKaynaklariCommand(
     string Aciklama
 ) : IRequest<InsanKaynaklariEntity>;
 
-public class UpdateInsanKaynaklariCommandHandler : IRequestHandler<UpdateInsanKaynaklariCommand, InsanKaynaklariEntity>
+public class UpdateInsanKaynaklariCommandHandler
+    : IRequestHandler<UpdateInsanKaynaklariCommand, InsanKaynaklariEntity>
 {
     private readonly IInsanKaynaklariRepository _repo;
 
@@ -83,7 +85,8 @@ public class UpdateInsanKaynaklariCommandHandler : IRequestHandler<UpdateInsanKa
 // DELETE
 public record DeleteInsanKaynaklariCommand(string Id) : IRequest<bool>;
 
-public class DeleteInsanKaynaklariCommandHandler : IRequestHandler<DeleteInsanKaynaklariCommand, bool>
+public class DeleteInsanKaynaklariCommandHandler
+    : IRequestHandler<DeleteInsanKaynaklariCommand, bool>
 {
     private readonly IInsanKaynaklariRepository _repo;
 

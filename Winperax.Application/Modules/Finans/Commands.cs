@@ -1,4 +1,3 @@
-
 using MediatR;
 using Winperax.Domain.Entities;
 using Winperax.Domain.Interfaces;
@@ -101,10 +100,7 @@ public class DeleteFinansCommandHandler : IRequestHandler<DeleteFinansCommand, b
         _repo = repo;
     }
 
-    public async Task<bool> Handle(
-        DeleteFinansCommand request,
-        CancellationToken cancellationToken
-    )
+    public async Task<bool> Handle(DeleteFinansCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repo.GetByIdAsync(request.Id);
         if (entity == null)

@@ -1,7 +1,7 @@
-﻿using MediatR;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MediatR;
 using Winperax.Application.Interfaces;
-using Winperax.Application.Modules.User;
+using Winperax.Application.Modules.User; // ✅ LoginCommand ve RegisterCommand için
 
 namespace Winperax.Application.Services;
 

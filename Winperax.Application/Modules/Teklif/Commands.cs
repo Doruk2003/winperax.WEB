@@ -96,10 +96,7 @@ public class DeleteTeklifCommandHandler : IRequestHandler<DeleteTeklifCommand, b
         _repo = repo;
     }
 
-    public async Task<bool> Handle(
-        DeleteTeklifCommand request,
-        CancellationToken cancellationToken
-    )
+    public async Task<bool> Handle(DeleteTeklifCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repo.GetByIdAsync(request.Id);
         if (entity == null)

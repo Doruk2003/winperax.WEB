@@ -104,10 +104,7 @@ public class DeleteBordroCommandHandler : IRequestHandler<DeleteBordroCommand, b
         _repo = repo;
     }
 
-    public async Task<bool> Handle(
-        DeleteBordroCommand request,
-        CancellationToken cancellationToken
-    )
+    public async Task<bool> Handle(DeleteBordroCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repo.GetByIdAsync(request.Id);
         if (entity == null)

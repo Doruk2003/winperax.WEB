@@ -29,7 +29,7 @@ public class CreateCariCommandHandler : IRequestHandler<CreateCariCommand, CariE
             VergiNo = request.VergiNo,
         };
 
-        await _repo.AddAsync(entity); // InsertAsync yerine AddAsync kullanıldı
+        await _repo.AddAsync(entity);
         return entity;
     }
 }
