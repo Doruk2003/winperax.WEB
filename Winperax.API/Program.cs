@@ -1,9 +1,9 @@
 ﻿using System.Text;
-// FluentValidation için gerekli using'ler
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Winperax.API.Middleware; // Yeni middleware için
 using Winperax.API.Services;
@@ -28,6 +28,25 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Pr
 
 // ValidationBehavior registration (FluentValidation ile MediatR entegrasyonu için)
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+// FluentValidation hatalarını ApiResponse formatında dönmek için yapılandırma
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context
+            .ModelState.Where(x => x.Value.Errors.Count > 0)
+            .SelectMany(x => x.Value.Errors)
+            .Select(x => x.ErrorMessage)
+            .ToArray();
+
+        var response = Winperax.API.Responses.ApiResponse.FailureResult(
+            errors,
+            "Validation failed"
+        );
+        return new BadRequestObjectResult(response);
+    };
+});
 
 // 🔥 Bind JWT Settings (from appsettings.json)
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));

@@ -8,8 +8,10 @@ namespace Winperax.Application.Validators.Bordro
         public DeleteBordroCommandValidator()
         {
             RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("Bordro ID boş olamaz.")
-                .Length(1, 50).WithMessage("Bordro ID 1 ile 50 karakter arasında olmalıdır.");
+                .NotEmpty()
+                .WithMessage("Bordro ID boş olamaz.")
+                .Length(1, 50)
+                .WithMessage("Bordro ID 1 ile 50 karakter arasında olmalıdır.");
         }
     }
 }

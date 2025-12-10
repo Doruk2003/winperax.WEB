@@ -55,7 +55,6 @@ D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\staticwebassets.build.json
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\staticwebassets.development.json
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\swae.build.ex.cache
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.D4D2A8E7.Up2Date
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\Winperax.Api.dll
 D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\refint\Winperax.Api.dll

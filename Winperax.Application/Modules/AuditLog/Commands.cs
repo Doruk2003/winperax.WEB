@@ -2,7 +2,6 @@ using MediatR;
 using Winperax.Domain.Entities;
 using Winperax.Domain.Interfaces;
 
-
 namespace Winperax.Application.Modules.AuditLog;
 
 // CREATE
