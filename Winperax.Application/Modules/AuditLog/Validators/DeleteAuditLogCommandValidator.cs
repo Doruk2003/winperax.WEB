@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.AuditLog;
+using Winperax.Application.Modules.AuditLog.Commands.DeleteAuditLog;
 
 namespace Winperax.Application.Validators.AuditLog
 {

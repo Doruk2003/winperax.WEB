@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Siparis;
+using Winperax.Application.Modules.Siparis.Commands.CreateSiparis;
 
 namespace Winperax.Application.Validators.Siparis
 {

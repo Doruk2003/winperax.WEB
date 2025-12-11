@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Bordro;
+using Winperax.Application.Modules.Bordro.Commands.CreateBordro;
 
 namespace Winperax.Application.Validators.Bordro
 {

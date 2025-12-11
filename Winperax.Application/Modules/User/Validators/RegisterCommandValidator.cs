@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.User;
+using Winperax.Application.Modules.User.Commands.Register;
 
 namespace Winperax.Application.Validators.User
 {

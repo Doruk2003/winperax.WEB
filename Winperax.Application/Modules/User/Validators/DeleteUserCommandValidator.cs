@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.User;
+using Winperax.Application.Modules.User.Commands.DeleteUser;
 
 namespace Winperax.Application.Validators.User
 {

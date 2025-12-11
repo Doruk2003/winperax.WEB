@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Winperax.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aaf608523206d3c3eafdad7877d1c9a38897c7a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8bd8acf3505bd987b424418c5c9c049d7ca10bfc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Winperax.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Winperax.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

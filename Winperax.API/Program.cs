@@ -5,8 +5,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Serilog; // Serilog için eklendi
+using OpenTelemetry.Logs; // OpenTelemetry için eklendi
+using OpenTelemetry.Trace; // OpenTelemetry için eklendi
+using OpenTelemetry.Metrics; // OpenTelemetry için eklendi
 using Winperax.API.Middleware; // Yeni middleware için
-using Winperax.API.Services;
 using Winperax.API.Settings;
 using Winperax.Application.Behaviors; // ValidationBehavior için
 using Winperax.Application.Services;
@@ -15,7 +18,24 @@ using Winperax.Infrastructure.Persistence;
 using Winperax.Infrastructure.Repositories;
 using Winperax.Infrastructure.Services; // PasswordHasherService, JwtTokenGeneratorService, AuthService için
 
+// Serilog yapılandırması
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) // appsettings.json'dan oku
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .Enrich.WithThreadId()
+    .CreateBootstrapLogger(); // Uygulama başlamadan loglama başlatılır
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog'u DI konteynerine ekle
+builder.Host.UseSerilog();
+
+// OpenTelemetry'i ekle (Tracing ve Metrics için)
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing.AddAspNetCoreInstrumentation())
+    .WithMetrics(metrics => metrics.AddAspNetCoreInstrumentation());
+
 
 // Controllers & Minimal APIs
 builder.Services.AddControllers();

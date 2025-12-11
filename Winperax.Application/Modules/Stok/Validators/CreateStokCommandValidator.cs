@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Stok;
+using Winperax.Application.Modules.Stok.Commands.CreateStok;
 
 namespace Winperax.Application.Validators.Stok
 {

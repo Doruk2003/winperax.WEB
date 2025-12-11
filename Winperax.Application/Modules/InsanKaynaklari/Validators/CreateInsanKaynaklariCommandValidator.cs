@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.InsanKaynaklari;
+using Winperax.Application.Modules.InsanKaynaklari.Commands.CreateInsanKaynaklari;
 
 namespace Winperax.Application.Validators.InsanKaynaklari
 {

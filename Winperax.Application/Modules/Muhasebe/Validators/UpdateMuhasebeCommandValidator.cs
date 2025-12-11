@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Muhasebe;
+using Winperax.Application.Modules.Muhasebe.Commands.UpdateMuhasebe;
 
 namespace Winperax.Application.Validators.Muhasebe
 {

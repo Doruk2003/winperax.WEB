@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Teklif;
+using Winperax.Application.Modules.Teklif.Commands.DeleteTeklif;
 
 namespace Winperax.Application.Validators.Teklif
 {

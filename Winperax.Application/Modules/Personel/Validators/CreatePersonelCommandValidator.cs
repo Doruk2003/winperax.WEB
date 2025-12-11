@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Personel;
+using Winperax.Application.Modules.Personel.Commands.CreatePersonel;
 
 namespace Winperax.Application.Validators.Personel
 {

@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Rol;
+using Winperax.Application.Modules.Rol.Commands.CreateRol;
 
 namespace Winperax.Application.Validators.Rol
 {

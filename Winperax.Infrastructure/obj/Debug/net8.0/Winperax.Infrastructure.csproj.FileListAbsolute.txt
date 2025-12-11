@@ -14,3 +14,5 @@ D:\Projects\Net\src\Winperax.Infrastructure\obj\Debug\net8.0\Winperax.Infrastruc
 D:\Projects\Net\src\Winperax.Infrastructure\obj\Debug\net8.0\refint\Winperax.Infrastructure.dll
 D:\Projects\Net\src\Winperax.Infrastructure\obj\Debug\net8.0\Winperax.Infrastructure.pdb
 D:\Projects\Net\src\Winperax.Infrastructure\obj\Debug\net8.0\ref\Winperax.Infrastructure.dll
+D:\Projects\Net\src\Winperax.Infrastructure\bin\Debug\net8.0\Winperax.Application.dll
+D:\Projects\Net\src\Winperax.Infrastructure\bin\Debug\net8.0\Winperax.Application.pdb

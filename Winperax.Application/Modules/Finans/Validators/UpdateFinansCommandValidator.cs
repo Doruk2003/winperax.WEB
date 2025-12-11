@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Finans;
+using Winperax.Application.Modules.Finans.Commands.UpdateFinans;
 
 namespace Winperax.Application.Validators.Finans
 {

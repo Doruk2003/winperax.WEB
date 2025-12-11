@@ -2,6 +2,7 @@
 using Winperax.Application.Common.Responses; // ✅ AuthResponse için
 using Winperax.Application.Services; // ✅ IAuthService, IPasswordHasher, IJwtTokenGenerator için
 using Winperax.Domain.Interfaces; // ✅ IUserRepository için
+using Winperax.Domain.Entities; // ✅ UserEntity için
 
 namespace Winperax.Infrastructure.Services; // ✅ Namespace doğru
 
@@ -32,7 +33,7 @@ public class AuthService : IAuthService // ✅ Application katmanındaki arayüz
         }
 
         // 2. Parolayı doğrula
-        if (!_passwordHasher.Verify(password, user.HashedPassword)) // ✅ Hash doğrulaması yapıldı
+        if (!_passwordHasher.Verify(password, user.PasswordHash)) // ✅ UserEntity'deki PasswordHash alanı kullanıldı
         {
             return new AuthResponse { IsSuccess = false, Message = "Geçersiz parola." };
         }
@@ -57,7 +58,16 @@ public class AuthService : IAuthService // ✅ Application katmanındaki arayüz
         var hashedPassword = _passwordHasher.Hash(password); // ✅ Parola hash'ledi
 
         // 3. Yeni kullanıcı oluştur ve veritabanına ekle
-        var newUser = new UserEntity { Email = email, HashedPassword = hashedPassword, FullName = fullName, ... }; // ... diğer gerekli alanlar
+        var newUser = new UserEntity
+        {
+            Email = email,
+            PasswordHash = hashedPassword, // ✅ UserEntity'deki PasswordHash alanı kullanıldı
+            KullaniciAdi = fullName, // ✅ FullName kullaniciAdi olarak atandı
+            RolId = "default_user_role_id", // ✅ Varsayılan bir rol ID'si atandı (gerçek ID'ye göre güncellenmeli)
+            AktifMi = true, // ✅ Yeni kullanıcı aktif olarak işaretlendi
+            CreatedAt = DateTime.UtcNow // ✅ Oluşturma tarihi eklendi
+            // Id alanı MongoDB tarafından otomatik atanacak
+        };
         await _userRepository.AddAsync(newUser);
 
         // 4. JWT Token oluştur (isteğe bağlı)

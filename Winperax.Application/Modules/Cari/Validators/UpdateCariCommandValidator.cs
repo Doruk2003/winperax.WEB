@@ -1,5 +1,6 @@
 using FluentValidation;
 using Winperax.Application.Modules.Cari;
+using Winperax.Application.Modules.Cari.Commands.UpdateCari;
 
 namespace Winperax.Application.Validators.Cari
 {
