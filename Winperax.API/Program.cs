@@ -13,6 +13,7 @@ using Winperax.Application.Services;
 using Winperax.Domain.Interfaces;
 using Winperax.Infrastructure.Persistence;
 using Winperax.Infrastructure.Repositories;
+using Winperax.Infrastructure.Services; // PasswordHasherService, JwtTokenGeneratorService, AuthService için
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,8 +95,10 @@ builder.Services.AddSingleton<IMongoContext, MongoDbContext>();
 // Generic Repository DI
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-// Auth Service
-builder.Services.AddScoped<AuthService>();
+// Application Services DI (Infrastructure'daki uygulamalar)
+builder.Services.AddScoped<IAuthService, AuthService>(); // ✅ Arayüz -> Uygulama
+builder.Services.AddScoped<IPasswordHasher, PasswordHasherService>(); // ✅ Arayüz -> Uygulama
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGeneratorService>(); // ✅ Arayüz -> Uygulama
 
 var app = builder.Build();
 
