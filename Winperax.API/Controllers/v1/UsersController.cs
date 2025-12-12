@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Winperax.API.Responses;
-using Winperax.Application.Modules.User; // LoginCommand ve RegisterCommand için
+using Winperax.Application.Modules.User.Commands.DeleteUser; // ✅ DeleteUserCommand için
+using Winperax.Application.Modules.User.Commands.UpdateUser; // ✅ UpdateUserCommand için
+using Winperax.Application.Modules.User.Queries.GetAllUsers; // ✅ GetAllUsersQuery için
+using Winperax.Application.Modules.User.Queries.GetUserById; // ✅ GetUserByIdQuery için
 
 namespace Winperax.API.Controllers.v1
 {
@@ -43,7 +46,7 @@ namespace Winperax.API.Controllers.v1
                 command.RolId,
                 command.AktifMi
             );
-            
+
             var result = await _mediator.Send(updatedCommand);
             return Ok(ApiResponse<object>.SuccessResult(result, "User updated successfully"));
         }

@@ -2,7 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Winperax.API.Responses;
-using Winperax.Application.Modules.Finans; // CreateFinansCommand, UpdateFinansCommand, DeleteFinansCommand, GetAllFinansQuery, GetFinansByIdQuery için
+// Eski using satırı kaldırıldı
+using Winperax.Application.Modules.Finans.Commands.CreateFinans; // ✅ CreateFinansCommand için
+using Winperax.Application.Modules.Finans.Commands.DeleteFinans; // ✅ DeleteFinansCommand için
+using Winperax.Application.Modules.Finans.Commands.UpdateFinans; // ✅ UpdateFinansCommand için
+using Winperax.Application.Modules.Finans.Queries.GetAllFinanss; // ✅ GetAllFinansQuery için
+using Winperax.Application.Modules.Finans.Queries.GetFinansById; // ✅ GetFinansByIdQuery için
 
 namespace Winperax.API.Controllers.v1
 {
@@ -22,22 +27,29 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllFinansQuery());
-            return Ok(ApiResponse<object>.SuccessResult(result, "Finans records retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Finans records retrieved successfully")
+            );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetFinansByIdQuery(id));
-            return Ok(ApiResponse<object>.SuccessResult(result, "Finans record retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Finans record retrieved successfully")
+            );
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateFinansCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
-                ApiResponse<object>.SuccessResult(result, "Finans record created successfully"));
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = result.Id },
+                ApiResponse<object>.SuccessResult(result, "Finans record created successfully")
+            );
         }
 
         [HttpPut("{id}")]
@@ -53,9 +65,11 @@ namespace Winperax.API.Controllers.v1
                 command.Aciklama,
                 command.GirisMi
             );
-            
+
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Finans record updated successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Finans record updated successfully")
+            );
         }
 
         [HttpDelete("{id}")]
@@ -63,7 +77,9 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteFinansCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Finans record deleted successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Finans record deleted successfully")
+            );
         }
     }
 }

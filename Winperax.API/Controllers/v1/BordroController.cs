@@ -2,7 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Winperax.API.Responses;
-using Winperax.Application.Modules.Bordro; // CreateBordroCommand, UpdateBordroCommand, DeleteBordroCommand, GetAllBordroQuery, GetBordroByIdQuery için
+using Winperax.Application.Modules.Bordro.Commands.CreateBordro; // ✅ CreateBordroCommand için
+using Winperax.Application.Modules.Bordro.Commands.DeleteBordro; // ✅ DeleteBordroCommand için
+using Winperax.Application.Modules.Bordro.Commands.UpdateBordro; // ✅ UpdateBordroCommand için
+using Winperax.Application.Modules.Bordro.Queries.GetAllBordros; // ✅ GetAllBordroQuery için
+using Winperax.Application.Modules.Bordro.Queries.GetBordroById; // ✅ GetBordroByIdQuery için
 
 namespace Winperax.API.Controllers.v1
 {
@@ -22,22 +26,29 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllBordroQuery());
-            return Ok(ApiResponse<object>.SuccessResult(result, "Bordro records retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Bordro records retrieved successfully")
+            );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetBordroByIdQuery(id));
-            return Ok(ApiResponse<object>.SuccessResult(result, "Bordro record retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Bordro record retrieved successfully")
+            );
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBordroCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
-                ApiResponse<object>.SuccessResult(result, "Bordro record created successfully"));
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = result.Id },
+                ApiResponse<object>.SuccessResult(result, "Bordro record created successfully")
+            );
         }
 
         [HttpPut("{id}")]
@@ -54,9 +65,11 @@ namespace Winperax.API.Controllers.v1
                 command.ToplamOdenecek,
                 command.OdemeTarihi
             );
-            
+
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Bordro record updated successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Bordro record updated successfully")
+            );
         }
 
         [HttpDelete("{id}")]
@@ -64,7 +77,9 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteBordroCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Bordro record deleted successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Bordro record deleted successfully")
+            );
         }
     }
 }

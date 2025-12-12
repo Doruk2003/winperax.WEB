@@ -5,20 +5,23 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Serilog; // Serilog için eklendi
 using OpenTelemetry.Logs; // OpenTelemetry için eklendi
-using OpenTelemetry.Trace; // OpenTelemetry için eklendi
 using OpenTelemetry.Metrics; // OpenTelemetry için eklendi
+using OpenTelemetry.Trace; // OpenTelemetry için eklendi
+using Serilog; // Serilog için eklendi
 using Winperax.API.Middleware; // Yeni middleware için
-using Winperax.API.Settings;
 using Winperax.Application.Behaviors; // ValidationBehavior için
 using Winperax.Application.Services;
 using Winperax.Domain.Interfaces;
 using Winperax.Infrastructure.Persistence;
 using Winperax.Infrastructure.Repositories;
 using Winperax.Infrastructure.Services; // PasswordHasherService, JwtTokenGeneratorService, AuthService için
+using Winperax.Infrastructure.Settings; // ✅ JwtSettings için doğru namespace
 
-// Serilog yapılandırması
+// builder değişkenini tanımla
+var builder = WebApplication.CreateBuilder(args); // ✅ builder değişkeni burada tanımlandı
+
+// Serilog yapılandırması (builder'dan sonra)
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration) // appsettings.json'dan oku
     .Enrich.FromLogContext()
@@ -26,16 +29,14 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithThreadId()
     .CreateBootstrapLogger(); // Uygulama başlamadan loglama başlatılır
 
-var builder = WebApplication.CreateBuilder(args);
-
 // Serilog'u DI konteynerine ekle
 builder.Host.UseSerilog();
 
 // OpenTelemetry'i ekle (Tracing ve Metrics için)
-builder.Services.AddOpenTelemetry()
+builder
+    .Services.AddOpenTelemetry()
     .WithTracing(tracing => tracing.AddAspNetCoreInstrumentation())
     .WithMetrics(metrics => metrics.AddAspNetCoreInstrumentation());
-
 
 // Controllers & Minimal APIs
 builder.Services.AddControllers();
@@ -70,11 +71,11 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 
 // 🔥 Bind JWT Settings (from appsettings.json)
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt")); // ✅ JwtSettings için gerekli using eklendi
 
 // JWT Config
-var jwtKey = builder.Configuration["Jwt:Key"];
-var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+var jwtKey = builder.Configuration["Jwt:Key"]!; // ✅ Null olmayan değer atandı
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]!; // ✅ Null olmayan değer atandı
 
 // Null kontrolü ekle
 if (string.IsNullOrEmpty(jwtKey))

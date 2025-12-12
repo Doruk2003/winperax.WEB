@@ -5,7 +5,6 @@ using MongoDB.Driver;
 using Winperax.Domain.Entities;
 using Winperax.Domain.Interfaces;
 using Winperax.Infrastructure.Persistence;
-using Winperax.Domain.Interfaces;
 
 namespace Winperax.Infrastructure.Repositories.User;
 

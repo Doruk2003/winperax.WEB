@@ -2,7 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Winperax.API.Responses;
-using Winperax.Application.Modules.Cari; // CreateCariCommand, UpdateCariCommand, DeleteCariCommand, GetAllCariQuery, GetCariByIdQuery için
+// Eski using satırı kaldırıldı
+using Winperax.Application.Modules.Cari.Commands.CreateCari; // ✅ CreateCariCommand için
+using Winperax.Application.Modules.Cari.Commands.DeleteCari; // ✅ DeleteCariCommand için
+using Winperax.Application.Modules.Cari.Commands.UpdateCari; // ✅ UpdateCariCommand için
+using Winperax.Application.Modules.Cari.Queries.GetAllCari; // ✅ GetAllCariQuery için
+using Winperax.Application.Modules.Cari.Queries.GetCariById; // ✅ GetCariByIdQuery için
 
 namespace Winperax.API.Controllers.v1
 {
@@ -22,22 +27,29 @@ namespace Winperax.API.Controllers.v1
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllCariQuery());
-            return Ok(ApiResponse<object>.SuccessResult(result, "Cari records retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Cari records retrieved successfully")
+            );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _mediator.Send(new GetCariByIdQuery(id));
-            return Ok(ApiResponse<object>.SuccessResult(result, "Cari record retrieved successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Cari record retrieved successfully")
+            );
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCariCommand command)
         {
             var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, 
-                ApiResponse<object>.SuccessResult(result, "Cari record created successfully"));
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = result.Id },
+                ApiResponse<object>.SuccessResult(result, "Cari record created successfully")
+            );
         }
 
         [HttpPut("{id}")]
@@ -49,9 +61,11 @@ namespace Winperax.API.Controllers.v1
                 command.Unvan,
                 command.VergiNo
             );
-            
+
             var result = await _mediator.Send(updatedCommand);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Cari record updated successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Cari record updated successfully")
+            );
         }
 
         [HttpDelete("{id}")]
@@ -59,7 +73,9 @@ namespace Winperax.API.Controllers.v1
         {
             var command = new DeleteCariCommand(id);
             var result = await _mediator.Send(command);
-            return Ok(ApiResponse<object>.SuccessResult(result, "Cari record deleted successfully"));
+            return Ok(
+                ApiResponse<object>.SuccessResult(result, "Cari record deleted successfully")
+            );
         }
     }
 }
