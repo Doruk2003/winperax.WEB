@@ -10,6 +10,7 @@ using OpenTelemetry.Metrics; // OpenTelemetry için eklendi
 using OpenTelemetry.Trace; // OpenTelemetry için eklendi
 using Serilog; // Serilog için eklendi
 using Winperax.API.Middleware; // Yeni middleware için
+using Winperax.Infrastructure.Repositories.User; // ✅ UserRepository için
 using Winperax.Application.Behaviors; // ValidationBehavior için
 using Winperax.Application.Services;
 using Winperax.Domain.Interfaces;
@@ -40,6 +41,18 @@ builder
 
 // Controllers & Minimal APIs
 builder.Services.AddControllers();
+
+// Swagger/OpenAPI için gerekli servisleri ekle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Winperax API",
+        Version = "v1",
+        Description = "ERP sistemine ait API endpoint'leri."
+    });
+});
 
 // FluentValidation registration
 builder.Services.AddFluentValidationAutoValidation();
@@ -120,8 +133,17 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IAuthService, AuthService>(); // ✅ Arayüz -> Uygulama
 builder.Services.AddScoped<IPasswordHasher, PasswordHasherService>(); // ✅ Arayüz -> Uygulama
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGeneratorService>(); // ✅ Arayüz -> Uygulama
+builder.Services.AddScoped<IUserRepository, UserRepository>(); // ✅ IUserRepository -> UserRepository
 
 var app = builder.Build();
+
+// Swagger UI'ı etkinleştir
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Winperax API v1");
+    c.RoutePrefix = string.Empty; // Swagger UI'ı kök dizinde göster
+});
 
 // Global Exception Middleware (sıra önemli!)
 app.UseMiddleware<GlobalExceptionMiddleware>();

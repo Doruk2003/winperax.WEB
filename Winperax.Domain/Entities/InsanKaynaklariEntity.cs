@@ -1,4 +1,4 @@
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Winperax.Domain.ValueObjects;
 
@@ -8,12 +8,13 @@ public class InsanKaynaklariEntity
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
+    public required string Id { get; set; }
 
-    public string PersonelId { get; set; }
+    public required string PersonelId { get; set; }
     public int YillikIzinHakki { get; set; }
     public int KullanilanIzin { get; set; }
     public int KalanIzin { get; set; }
-    public List<IzinKaydi> Izinler { get; set; } = new(); // IDE0028 uyarısını gidermek için
-    public string Aciklama { get; set; }
+    public required List<IzinKaydi> Izinler { get; set; } = new(); // IDE0028 uyarÄ±sÄ±nÄ± gidermek iÃ§in
+    public required string Aciklama { get; set; }
 }
+

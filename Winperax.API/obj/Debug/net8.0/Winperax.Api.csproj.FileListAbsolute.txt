@@ -98,3 +98,4 @@ D:\Projects\Net\src\Winperax.API\bin\Debug\net8.0\System.IO.Pipelines.dll
 D:\Projects\Net\src\Winperax.API\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 D:\Projects\Net\src\Winperax.API\bin\Debug\net8.0\System.Text.Json.dll
 D:\Projects\Net\src\Winperax.API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\Projects\Net\src\Winperax.API\obj\Debug\net8.0\swae.build.ex.cache
